@@ -8,11 +8,12 @@ const {
   createAppError,
   globalErrorHandler,
 } = require("./utils/errorMiddleware");
+const connectDB = require("./config/db");
 
 const app = express();
 
-// // Connect to database
-// connectDB();
+// Connect to database
+connectDB();
 
 // Middleware
 app.use(cors());

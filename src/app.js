@@ -4,6 +4,7 @@ const cors = require("cors");
 const { StatusCodes } = require("http-status-codes");
 const path = require("path");
 
+const taskRoutes = require("./routes/taskRoutes");
 const {
   createAppError,
   globalErrorHandler,
@@ -20,7 +21,7 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-// app.use("/api/tasks", taskRoutes);
+app.use("/api/tasks", taskRoutes);
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/index.html"));

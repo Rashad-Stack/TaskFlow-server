@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Taskflow API Documentation</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+      .container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #333;
+      }
+      p {
+        color: #666;
+      }
+      code {
+        background-color: #eee;
+        padding: 2px 4px;
+        border-radius: 4px;
+      }
+      pre {
+        background-color: #eee;
+        padding: 10px;
+        border-radius: 4px;
+        overflow-x: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Welcome to Taskflow API</h1>
+      <p>
+        This API allows you to manage tasks. Below are the available endpoints:
+      </p>
+
+      <h2>Endpoints</h2>
+      <ul>
+        <li><code>POST /tasks</code> - Add a new task</li>
+        <li>
+          <code>GET /tasks</code> - Retrieve all tasks for the logged-in user
+        </li>
+        <li>
+          <code>PUT /tasks/:id</code> - Update task details (title, description,
+          category)
+        </li>
+        <li><code>DELETE /tasks/:id</code> - Delete a task</li>
+      </ul>
+
+      <h2>Task Object</h2>
+      <pre>
+{
+  "title": "Task Title",
+  "description": "Task Description",
+  "timestamp": "2025-02-20T12:34:56.789Z",
+  "category": "To-Do",
+  "userId": "user123"
+}
+    </pre
+      >
+
+      <h2>Authentication</h2>
+      <p>
+        Only authenticated users can access the API. Use Firebase Authentication
+        (Google sign-in) to authenticate users.
+      </p>
+
+      <h2>Real-time Updates</h2>
+      <p>
+        The API supports real-time updates using WebSockets. Ensure that tasks
+        remain in their last known order when the user refreshes or reopens the
+        app.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        If you have any questions or need further assistance, please contact the
+        API support team.
+      </p>
+    </div>
+  </body>
+</html>

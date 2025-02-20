@@ -9,7 +9,9 @@ const {
   createAppError,
   globalErrorHandler,
 } = require("./utils/errorMiddleware");
+
 const connectDB = require("./config/db");
+const morgan = require("morgan");
 
 const app = express();
 
@@ -19,6 +21,7 @@ connectDB();
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use(morgan("dev"));
 
 // Routes
 app.use("/api/tasks", taskRoutes);

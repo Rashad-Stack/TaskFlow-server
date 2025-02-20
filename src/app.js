@@ -5,6 +5,7 @@ const { StatusCodes } = require("http-status-codes");
 const path = require("path");
 
 const taskRoutes = require("./routes/taskRoutes");
+const userRoutes = require("./routes/userRoutes");
 const {
   createAppError,
   globalErrorHandler,
@@ -25,7 +26,9 @@ app.use(morgan("dev"));
 
 // Routes
 app.use("/api/tasks", taskRoutes);
+app.use("/api/users", userRoutes);
 
+// Serve static assets in production
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/index.html"));
 });

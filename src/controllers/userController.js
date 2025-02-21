@@ -5,8 +5,13 @@ const User = require("../models/userModel");
 exports.createOrUpdateUser = async (req, res, next) => {
   try {
     const { userId, email, displayName } = req.body;
+    // Debugging: Log the user ID
 
-    let user = await User.findOne({ userId });
+    let user = await User.findOne({
+      email,
+    });
+
+    console.log("User ID:", user); // Debugging: Log the user ID
 
     if (user) {
       // Update user details if user already exists

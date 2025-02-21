@@ -11,7 +11,7 @@ exports.createOrUpdateUser = async (req, res, next) => {
       email,
     });
 
-    console.log("User ID:", user); // Debugging: Log the user ID
+    // Debugging: Log the user ID
 
     if (user) {
       // Update user details if user already exists

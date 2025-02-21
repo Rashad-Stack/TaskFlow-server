@@ -12,10 +12,7 @@ const DB = process.env.MONGODB_DATABASE_URL.replace(
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(DB, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(DB);
     logger.info("MongoDB connected successfully");
   } catch (error) {
     logger.error("MongoDB connection failed", error);

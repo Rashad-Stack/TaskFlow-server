@@ -13,13 +13,7 @@ exports.createOrUpdateUser = async (req, res, next) => {
 
     // Debugging: Log the user ID
 
-    if (user) {
-      // Update user details if user already exists
-      user.email = email;
-      user.displayName = displayName;
-      user = await user.save();
-    } else {
-      // Create a new user if user does not exist
+    if (!user) {
       user = new User({ userId, email, displayName });
       await user.save();
     }

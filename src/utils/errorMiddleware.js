@@ -1,16 +1,12 @@
 const { StatusCodes } = require("http-status-codes");
 const logger = require("./logger");
 
-exports.createAppError = function error(message, statusCode) {
+exports.createAppError = function createAppError(message, statusCode) {
   const error = new Error(message);
-
   error.statusCode = statusCode;
   error.status = `${statusCode}`.startsWith("4") ? "failed" : "error";
   error.isOperational = true;
-
-  Error.captureStackTrace(error, error);
-
-  throw error;
+  return error;
 };
 
 // eslint-disable-next-line no-unused-vars

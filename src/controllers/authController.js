@@ -1,32 +1,35 @@
 const admin = require("../config/firebase");
 const User = require("../models/userModel");
-const StatusCodes = require("http-status-codes").StatusCodes;
+const { createAppError } = require("../utils/errorMiddleware");
+const { StatusCodes } = require("http-status-codes");
 
 exports.verifyToken = async (req, res, next) => {
   const idToken = req.headers.authorization?.split("Bearer ")[1];
 
   if (!idToken) {
-    return res
-      .status(StatusCodes.UNAUTHORIZED)
-      .json({ message: "Unauthorized" });
+    return next(createAppError("Invalid token", StatusCodes.BAD_REQUEST));
   }
 
   try {
     const decodedToken = await admin.auth().verifyIdToken(idToken);
-    const { uid, email, name } = decodedToken;
+    const { email } = decodedToken;
 
     // Check if user exists in the database
-    let user = await User.findOne({ userId: uid });
+    let user = await User.findOne({ email });
 
     if (!user) {
-      // Create a new user if not found
-      user = new User({ userId: uid, email, displayName: name });
-      await user.save();
+      return next(
+        createAppError(
+          "The use belongs this token no longer exist!",
+          StatusCodes.UNAUTHORIZED
+        )
+      );
     }
 
     req.user = user;
     next();
   } catch (error) {
+    console.log(error);
     next(error);
   }
 };

@@ -16,8 +16,6 @@ exports.addTask = async (req, res, next) => {
 // Retrieve all tasks for the logged-in user
 exports.getTasks = async (req, res, next) => {
   try {
-    console.log("User ID:", req.user.id); // Debugging: Log the user ID
-
     const tasks = await Task.aggregate([
       { $match: { userId: new mongoose.Types.ObjectId(req.user.id) } },
       {
@@ -55,6 +53,7 @@ exports.getTasks = async (req, res, next) => {
 
 // Update task details
 exports.updateTask = async (req, res, next) => {
+  console.log(req.params.id);
   try {
     const task = await Task.findByIdAndUpdate(req.params.id, req.body, {
       new: true,

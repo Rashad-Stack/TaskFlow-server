@@ -1,16 +1,15 @@
 const express = require("express");
-const {
-  createOrUpdateUser,
-  getUser,
-} = require("../controllers/userController");
+const userController = require("../controllers/userController");
 const authController = require("../controllers/authController");
 
 const router = express.Router();
 
 // Create or update user
-router.route("/").post(createOrUpdateUser);
+router.route("/").post(userController.createUser);
 
 // Get user details
-router.route("/:userId").get(authController.verifyToken, getUser);
+router
+  .route("/:userId")
+  .get(authController.verifyToken, userController.getUser);
 
 module.exports = router;

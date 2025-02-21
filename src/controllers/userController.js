@@ -2,7 +2,7 @@ const { StatusCodes } = require("http-status-codes");
 const User = require("../models/userModel");
 
 // Create or update user
-exports.createOrUpdateUser = async (req, res, next) => {
+exports.createUser = async (req, res, next) => {
   try {
     const { userId, email, displayName } = req.body;
     // Debugging: Log the user ID
@@ -10,8 +10,6 @@ exports.createOrUpdateUser = async (req, res, next) => {
     let user = await User.findOne({
       email,
     });
-
-    // Debugging: Log the user ID
 
     if (!user) {
       user = new User({ userId, email, displayName });

@@ -44,14 +44,11 @@ app.get("/", (req, res) => {
 // Error handling middleware
 // Unhandled Routes
 app.all("*", (req, res, next) => {
-  try {
-    createAppError(
-      `Can't Find this URL (${req.originalUrl}) on this server!`,
-      StatusCodes.NOT_FOUND
-    );
-  } catch (error) {
-    next(error);
-  }
+  const error = createAppError(
+    `Can't Find this URL (${req.originalUrl}) on this server!`,
+    StatusCodes.NOT_FOUND
+  );
+  next(error);
 });
 
 app.use(globalErrorHandler);

@@ -8,7 +8,7 @@ const authController = require("../controllers/authController");
 const router = express.Router();
 
 // Create or update user
-router.route("/").post(authController.verifyToken, createOrUpdateUser);
+router.route("/").post(createOrUpdateUser);
 
 // Get user details
 router.route("/:userId").get(authController.verifyToken, getUser);

@@ -33,17 +33,10 @@ exports.getTasks = async (req, res, next) => {
       },
     ]);
 
-    const formattedTasks = tasks.reduce(
-      (acc, taskGroup) => {
-        acc[taskGroup.category] = taskGroup.tasks;
-        return acc;
-      },
-      {
-        "To-Do": [],
-        "In Progress": [],
-        Done: [],
-      }
-    );
+    const formattedTasks = tasks.map((taskGroup) => ({
+      category: taskGroup.category,
+      tasks: taskGroup.tasks,
+    }));
 
     res.status(200).json(formattedTasks);
   } catch (error) {
@@ -53,7 +46,6 @@ exports.getTasks = async (req, res, next) => {
 
 // Update task details
 exports.updateTask = async (req, res, next) => {
-  console.log(req.params.id);
   try {
     const task = await Task.findByIdAndUpdate(req.params.id, req.body, {
       new: true,

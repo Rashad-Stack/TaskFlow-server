@@ -19,8 +19,15 @@ exports.globalErrorHandler = (err, req, res, next) => {
   err.statusCode = err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR;
   err.status = err.status || "error";
 
+  // Handle specific Firebase ID token expiration error
+  if (err.message.includes("Firebase ID token has expired")) {
+    err.statusCode = StatusCodes.UNAUTHORIZED;
+    err.status = "failed";
+    err.message = "Your session has expired. Please log in again.";
+  }
+
   // A) API
-  if (req.originalUrl.startsWith("/api/v1")) {
+  if (req.originalUrl.startsWith("/api")) {
     return res.status(err.statusCode).json({
       status: err.status,
       message: err.message,

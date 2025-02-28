@@ -24,7 +24,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://rashad-stack-taskflow.netlify.app/",
+      "https://rashad-stack-taskflow.netlify.app",
     ],
     credentials: true,
   })
